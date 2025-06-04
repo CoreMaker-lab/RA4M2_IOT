@@ -12,7 +12,6 @@ RM := rm -rf
 -include sources.mk
 -include src/subdir.mk
 -include ra_gen/subdir.mk
--include ra/fsp/src/r_sci_uart/subdir.mk
 -include ra/fsp/src/r_ioport/subdir.mk
 -include ra/fsp/src/bsp/mcu/all/subdir.mk
 -include ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/subdir.mk
@@ -91,7 +90,7 @@ all: RA4M2_IOT_Project1.elf secondary-outputs
 
 # Tool invocations
 RA4M2_IOT_Project1.elf: $(OBJS) $(USER_OBJS) $(LINKER_SCRIPT)
-	$(file > RA4M2_IOT_Project1.elf.in,-mcpu=cortex-m33 -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-strict-aliasing -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal -g -T "fsp.ld" -Xlinker --gc-sections -L "C:\\Users\\a8456\\e2_studio\\workspace_5.8\\RA4M2_IOT_Project1/script" -Wl,-Map,"RA4M2_IOT_Project1.map" --specs=nano.specs -u _printf_float --specs=nosys.specs -o "RA4M2_IOT_Project1.elf" $(OBJS) $(USER_OBJS) $(LIBS))
+	$(file > RA4M2_IOT_Project1.elf.in,-mcpu=cortex-m33 -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-strict-aliasing -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal -g -T "fsp.ld" -Xlinker --gc-sections -L "C:\\Users\\a8456\\e2_studio\\workspace\\RA4M2_IOT_Project1/script" -Wl,-Map,"RA4M2_IOT_Project1.map" --specs=nano.specs -o "RA4M2_IOT_Project1.elf" -Wl,--start-group $(OBJS) $(USER_OBJS) $(LIBS) -Wl,--end-group)
 	@echo Building target: $@ && arm-none-eabi-gcc @"RA4M2_IOT_Project1.elf.in"
 RA4M2_IOT_Project1.srec: RA4M2_IOT_Project1.elf
 	arm-none-eabi-objcopy -O srec "RA4M2_IOT_Project1.elf"  "RA4M2_IOT_Project1.srec"
